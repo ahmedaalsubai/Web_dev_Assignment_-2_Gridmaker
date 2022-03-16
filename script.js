@@ -25,6 +25,9 @@ function addR() {
     }else {
         for(let i = 0; i < numColumns; i++){
             let col = document.createElement("td");
+            col.onclick = function (){
+                this.style.backgroundColor = colorSelected;
+            };
             row.appendChild(col);
         }
         grid.appendChild(row);
@@ -37,6 +40,9 @@ function addC() {
     let rows = document.getElementsByTagName("tr");
     let newcol = document.createElement("td");
     let row = document.createElement("tr");
+    newcol.onclick = function (){
+        this.style.backgroundColor = colorSelected;
+    }
     if(rows.length == 0){
         row.appendChild(newcol);
         grid.appendChild(row);
@@ -45,6 +51,9 @@ function addC() {
     }else {
         for(let row of rows){
             let newcol = document.createElement("td");
+            newcol.onclick = function (){
+                this.style.backgroundColor = colorSelected;
+            };
             row.appendChild(newcol);
         }
         numColumns++;
@@ -86,12 +95,37 @@ function selected(){
 
 function fill(){
     alert("Clicked Fill All")
+    let rows = document.getElementsByTagName("tr");
+    for(let row of rows){
+        let columns = row.childNodes;
+        for(column of columns){
+            column.style.backgroundColor = colorSelected;
+        }
+    }
+    
+
+
 }
 
 function clearAll(){
     alert("Clicked Clear All")
+    let rows = document.getElementsByTagName("tr");
+    for(let row of rows){
+        let columns = row.childNodes;
+        for(column of columns){
+            column.style.backgroundColor = "";
+        }
+    }
 }
 
 function fillU(){
     alert("Clicked Fill All Uncolored")
+    let rows = document.getElementsByTagName("tr");
+    for(let row of rows){
+        let columns = row.childNodes;
+        for(column of columns){
+            if(column.style.backgroundColor === "")
+                column.style.backgroundColor = colorSelected;
+        }
+    }
 }
